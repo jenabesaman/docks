@@ -1,0 +1,9 @@
+[Match]
+Name=ens160
+
+[Network]
+Address=172.16.40.170/24
+Gateway=172.16.40.254
+DNS=1.1.1.1
+DNS=178.22.122.100
+DNS=185.51.200.2
