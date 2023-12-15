@@ -1,0 +1,49 @@
+# Use Ubuntu 22.04 as base image
+FROM ubuntu:22.04
+
+# Update the system
+RUN apt-get update
+
+# Install Docker
+RUN apt-get install -y docker.io
+
+# Install Docker Machine
+RUN curl -L https://github.com/docker/machine/releases/download/v0.16.2/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine && \
+    chmod +x /tmp/docker-machine && \
+    cp /tmp/docker-machine /usr/local/bin/docker-machine
+
+# Install Git, Python3, pip3, libpq-dev, python3-dev
+RUN apt-get install -y git python3 python3-pip libpq-dev python3-dev
+
+# Install PostgreSQL
+RUN apt-get install -y postgresql postgresql-contrib
+
+# Switch to the postgres user
+USER postgres
+
+# Initialize the database and grant all permissions on mars to earth
+RUN /etc/init.d/postgresql start &&\
+    psql --command "CREATE USER earth WITH SUPERUSER PASSWORD 'moon_secret';" &&\
+    createdb -O earth mars &&\
+    psql --command "GRANT ALL PRIVILEGES ON DATABASE mars TO earth;"
+
+# Switch back to the root user
+USER root
+
+# Clone the MultiAV2 repository
+RUN git clone https://github.com/sakkiii/MultiAV2.git
+
+# Change to the MultiAV2 directory
+RUN cd MultiAV2
+
+# Install the requirements
+RUN pip3 install -r requirements.txt
+
+# Install the package
+RUN pip3 install -e .
+
+# Change to the multiav directory
+RUN cd multiav
+
+# Run the Python script
+CMD ["python3", "scripts/runserver.py"]
