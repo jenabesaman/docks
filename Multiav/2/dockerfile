@@ -30,7 +30,7 @@ USER root
 RUN git clone https://github.com/sakkiii/MultiAV2.git
 
 # Change to the MultiAV2 directory
-RUN cd MultiAV2
+WORKDIR MultiAV2
 
 # Install the requirements
 RUN pip3 install -r requirements.txt
@@ -39,7 +39,7 @@ RUN pip3 install -r requirements.txt
 RUN pip3 install -e .
 
 # Change to the multiav directory
-RUN cd multiav
+WORKDIR multiav
 
 # Run the Python script
 CMD ["python3", "scripts/runserver.py"]
