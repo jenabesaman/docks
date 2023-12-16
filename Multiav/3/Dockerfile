@@ -4,13 +4,7 @@ FROM ubuntu:22.04
 # Update the system
 RUN apt-get update -y
 
-# Create the Netplan configuration file
-RUN echo "network:\n  version: 2\n  ethernets:\n    docker_multiav_default:\n      dhcp4: true\n      nameservers:\n        addresses: [178.22.122.100, 185.51.200.2, 8.8.8.8]" > /etc/netplan/01-netcfg.yaml
-
-# Apply the Netplan configuration
-RUN netplan apply
-
-# Install Docker
+# Install Docker CLI
 RUN apt-get install -y docker.io
 
 # Install Git, Python3, pip3, libpq-dev, python3-dev
