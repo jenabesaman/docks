@@ -1,0 +1,30 @@
+rsync -av -e 'ssh -o StrictHostKeyChecking=no' /etc/nginx/sites-available/ root@172.16.43.137:/home/kahkeshan/Backup/
+sshpass -pKahkeshan@123 rsync -av -e 'ssh -o StrictHostKeyChecking=no' /etc/nginx/sites-available/ root@172.16.43.137:/home/kahkeshan/Backup/
+
+
+for 170 server:
+
+0 1 * * * rsync -av /etc/nginx/sites-available/*conf  /home/kahkeshan/Backup/Configs/ >/dev/null 2>&1
+10 1 * * * rsync -av --include '*.service' --exclude '*' /etc/systemd/system/ /home/kahkeshan/Backup/services >/dev/null 2>&11
+20 1 * * * rsync -av --exclude '/kahkeshan' --exclude '/temp/Downloads'  --exclude '/dstv3/DataBase'  --exclude '/dstv3/GIT'  /home/  /home/kahkesha>
+10 2 * * * mongodump --out /home/kahkeshan/Backup/Mongodb.Databases/ >/dev/null 2>&1
+45 2 * * * rar a /home/kahkeshan/Backup_rar/Backup.rar /home/kahkeshan/Backup >/dev/null 2>&1
+31 8 * * * "/root/.acme.sh"/acme.sh --cron --home "/root/.acme.sh" > /dev/null
+
+
+
+for 245 server:
+
+
+0 1 * * * sshpass -pKahkeshan@123 rsync -av -e 'ssh -o StrictHostKeyChecking=no' /etc/nginx/sites-available/ root@172.16.43.137:/home/DSTV3/172.16.43.245/Configs/ >/dev/null 2>&1
+
+3 1 * * * sshpass -pKahkeshan@123 rsync -av --include '*.service' --exclude '*' -e 'ssh -o StrictHostKeyChecking=no' /etc/systemd/system/ root@172.16.43.137:/home/DSTV3/172.16.43.245/services/ >/dev/null 2>&1
+
+
+5 1 * * * sshpass -pKahkeshan@123 rsync -av --exclude '/kahkeshan' --exclude '/temp/Downloads' --exclude '/dstv3/DataBase' --exclude '/dstv3/GIT' -e 'ssh -o StrictHostKeyChecking=no' /home/ root@172.16.43.137:/home/DSTV3/172.16.43.245/home/ >/dev/null 2>&1
+
+
+* 2 * * * sshpass -pKahkeshan@123 ssh root@172.16.43.137 'mongodump --out /home/DSTV3/172.16.43.245/Mongodb.Databases/' >/dev/null 2>&1
+
+
+
