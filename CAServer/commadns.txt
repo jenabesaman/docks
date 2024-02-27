@@ -1,0 +1,9 @@
+mkdir ~/practice-csr
+cd ~/practice-csr
+openssl genrsa -out sammy-server.key
+
+
+openssl genrsa -out 172.16.40.170.key
+openssl req -new -key 172.16.40.170.key -out 172.16.40.170.req
+scp -P 44322 172.16.40.170.req root@172.16.43.113:/tmp/172.16.40.170.req
+pass: Dana@123#321

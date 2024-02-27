@@ -1,0 +1,8 @@
+sudo apt-get install dos2unix
+
+dos2unix /path/to/your/mongodb_restore.sh
+
+
+chmod +x mongodb_restore.sh
+
+./mongodb_restore.sh

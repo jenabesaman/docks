@@ -1,0 +1,22 @@
+sudo scp -r /home/dstv3/publish/* root@172.16.40.170:/home/dstv3/publish/
+sudo scp -r /home/Backups/172.16.43.202/Mongodb.Databases/mongodb_backup/ root@172.16.40.170:/home/Backups/172.16.43.202/Mongodb.Databases/
+sudo scp -r /home/Backups/172.16.43.245/Mongodb.Databases/mongodb_backup/ root@172.16.40.170:/home/Backups/172.16.43.245/Mongodb.Databases/
+
+
+sudo rsync -avz --exclude='appsettings.json' /home/dstv3/publish/ root@172.16.40.170:/home/dstv3/publish/
+
+
+tar -zxvf mongodb_backup.tar.gz
+
+
+
+
+* 3 * * * /bin/bash -c 'mongodump --out /mongodb_backup/ && tar -zcvf mongodb_backup.tar.gz /mongodb_backup/ && sshpass -p '\''Kahkeshan@123'\'' rsync -avz mongodb_backup.tar.gz root@172.16.43.137:/home/Backups/172.16.43.202/Mongodb.Databases/'
+
+
+
+
+sudo scp -r /home/Secured/* root@172.16.40.170:/home/Secured/
+
+
+find /home/dstv3/publish/ -type f ! -name 'appsettings.json' -exec sshpass -p 'Kahkeshan@123' rsync -R -e ssh {} root@172.16.40.170:/home/dstv3/publish/ \;

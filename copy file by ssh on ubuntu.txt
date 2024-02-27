@@ -1,0 +1,9 @@
+sudo scp -r /home/dstv3/publish/* root@172.16.40.170:/home/dstv3/publish/
+sudo scp -r /home/Backups/172.16.43.202/Mongodb.Databases/mongodb_backup/ root@172.16.40.170:/home/Backups/172.16.43.202/Mongodb.Databases/
+sudo scp -r /home/Backups/172.16.43.245/Mongodb.Databases/mongodb_backup/ root@172.16.40.170:/home/Backups/172.16.43.245/Mongodb.Databases/
+
+
+tar -zxvf mongodb_backup.tar.gz
+
+
+* 3 * * * /bin/bash -c 'mongodump --out /mongodb_backup/ && tar -zcvf mongodb_backup.tar.gz /mongodb_backup/ && sshpass -p '\''Kahkeshan@123'\'' rsync -avz mongodb_backup.tar.gz root@172.16.43.137:/home/Backups/172.16.43.202/Mongodb.Databases/'
