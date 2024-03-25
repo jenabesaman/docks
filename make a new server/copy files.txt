@@ -1,0 +1,13 @@
+/bin/bash -c '/usr/bin/sshpass -pKahkeshan@123 /usr/bin/rsync -av -e "ssh -o StrictHostKeyChecking=no -p 44322" /home/Backups/172.16.43.170/sites-available/* root@172.16.40.153:/etc/nginx/sites-available '
+
+
+/usr/bin/sshpass -p 'Kahkeshan@123' /usr/bin/rsync -av -e "ssh -o StrictHostKeyChecking=no -p 44322" /home/Backups/172.16.43.170/services/* root@172.16.40.153:/etc/systemd/system/
+
+
+ln -s /etc/nginx/sites-available/* /etc/nginx/sites-enabled/
+
+
+
+/usr/bin/sshpass -p 'Kahkeshan@123' /usr/bin/rsync -av -e "ssh -o StrictHostKeyChecking=no -p 44322" /home/Backups/172.16.43.170/dstv3/publish/* root@172.16.40.153:/home/dstv3/publish/
+
+/home/Backups/172.16.43.170/dstv3/publish/

@@ -1,0 +1,2 @@
+docker: Error response from daemon: Conflict. The container name "/minio1" is already in use by container "68974a40a1ac1d7175e8b1e3f9f56b415e160e8b47556f22cab7a2deeb472c8f". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.

@@ -1,0 +1,16 @@
+find /etc/nginx/sites-available/ -type f -exec sed -i 's/nginx-selfsigned.crt/mav-server.crt/g; s/nginx-selfsigned.key/maav-server.key/g' {} \;
+
+
+
+C:\Windows\System32\drivers\etc
+
+
+172.26.26.8 internet.local
+172.26.26.9 internet-dmz.local
+172.16.43.201   dana.fire.local
+172.16.43.227   mav.ddss.local
+172.16.43.245   main.ddss.local
+172.16.43.181   ntp.ddss.local
+172.16.43.113   ca.server.local
+172.16.43.165   mahdi.linux.local
+172.16.40.170   develop.ddss.local
