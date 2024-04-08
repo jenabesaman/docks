@@ -1,0 +1,41 @@
+image: mcr.microsoft.com/dotnet/sdk:6.0
+
+stages:
+  - build_and_deploy
+
+build_and_deploy:
+  stage: build_and_deploy
+  tags:
+    - docker-runner
+  script:
+    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client wget gnupg -y )'
+    - wget -qO docker.gpg https://download.docker.com/linux/ubuntu/gpg
+    - gpg --dearmor -o /etc/apt/trusted.gpg.d/docker.gpg docker.gpg
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - touch ~/.ssh/config
+    - touch ~/.ssh/known_hosts
+  ##  - chmod -R 400 ~/.ssh
+    - chmod 700 ~/.ssh
+  #   - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan 172.16.43.137 >> ~/.ssh/known_hosts
+    - '[[ -f /.dockerinit ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+    - dotnet build DSTV3.UploadInterface.Api/DSTV3.UploadInterface.Api.csproj --configuration Release
+    - dotnet publish DSTV3.UploadInterface.Api/DSTV3.UploadInterface.Api.csproj -c Release -r linux-x64 --output ./publish
+    # - systemctl restart ssh
+    # - ssh-keygen -t rsa -f ~/.ssh/id_rsa -N ""
+    # - cat ~/.ssh/id_rsa.pub
+    - echo "Attempting SSH connection..."
+    ##- ssh -o StrictHostKeyChecking=no cicd@172.16.43.137 echo "SSH connection successful."
+    - ssh -v -o StrictHostKeyChecking=no -i /home/private_key/priv_137 root@172.16.43.137 -p 22
+    - echo "SSH connection attempt completed."
+
+   # - ssh -v -o StrictHostKeyChecking=no root@172.16.43.137 echo "SSH connection successful."
+
+    
+    - scp ./publish/* root@172.16.43.137:/app/upload/
+    - scp dstv3.backend.test/DSTV3.UploadInterface.Api/Dockerfile root@172.16.43.137:/app/upload/
+    - ssh root@192.168.204.134 'docker build -t upload-image /app/upload'
+    - ssh root@192.168.204.134 'docker run -d --name upload-container -v /app/upload:/app/upload upload-image dotnet /app/upload/DSTV3.UploadInterface.Api.dll'

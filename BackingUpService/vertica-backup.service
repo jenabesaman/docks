@@ -1,0 +1,8 @@
+[Unit]
+Description=Backup service for Vertica backup
+
+[Service]
+ExecStart=/bin/bash -c '/etc/systemd/system/vertica-backup.sh'
+
+[Install]
+WantedBy=multi-user.target

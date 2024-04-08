@@ -1,0 +1,10 @@
+# vertica-backup.timer
+[Unit]
+Description=Backup timer for Vertica backup service
+
+[Timer]
+OnCalendar=*-*-* 02:30:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
