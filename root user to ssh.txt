@@ -1,0 +1,1 @@
+sudo bash -c "sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config && sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config && echo -e 'Kahkeshan@123\nKahkeshan@123' | passwd root && systemctl restart ssh"

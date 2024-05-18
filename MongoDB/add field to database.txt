@@ -1,0 +1,4 @@
+mongo 
+use DSTV3.Management
+{ "$set": { "Version": "0.1.0", "VersionNumber": "VersionNumber" } }
+{ "$set": { "PasswordAdmin": "Kahkeshan@123", "DanaDirectAccessControllers": "VersionNumber" } }

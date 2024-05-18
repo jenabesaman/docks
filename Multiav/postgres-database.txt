@@ -1,0 +1,4 @@
+sudo -u postgres psql -c "CREATE DATABASE mars;" -c "CREATE USER earth WITH PASSWORD 'moon_secret';" -c "GRANT ALL PRIVILEGES ON DATABASE mars TO earth;"
+
+
+sudo apt update && sudo apt install postgresql postgresql-contrib -y && sudo -u postgres psql -c "CREATE DATABASE mars;" -c "CREATE USER earth WITH PASSWORD 'moon_secret';" -c "GRANT ALL PRIVILEGES ON DATABASE mars TO earth;"

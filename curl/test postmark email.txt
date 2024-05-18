@@ -1,0 +1,48 @@
+curl -X GET "https://api.postmarkapp.com/" \
+     -H "X-Postmark-Server-Token: 6cd4b398-ecfb-4505-bbdf-1b66192614cb"
+
+
+
+old:
+
+curl --request POST \
+  --url https://172.16.40.170:9408/api/Email/Send \
+  --header 'Content-Type: application/json' \
+  --header 'CredentialToken: 7a39c8fd4091665d51504a36b7fed894' \
+  --header 'User-Agent: insomnia/8.6.1' \
+  --data '{
+  "to": "samanamman@gmail.com",
+  "subject": "test",
+  "message": "salaaaaaaaam"
+}' 
+  --dns-servers 8.8.8.8
+
+new:
+
+curl --request POST \
+  --url https://172.16.40.170:44363/api/Email/Send \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: insomnia/8.6.1' \
+  --header 'X-Credential-Token: 7a39c8fd4091665d51504a36b7fed894' \
+  --data '{
+  "to": "samanamman@gmail.com",
+  "subject": "sssss",
+  "body": "test v8",
+  "isHTMLBody": false
+}' 
+
+
+
+
+curl --request POST \
+  --url https://172.16.40.170:44363/api/Email/Send \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: insomnia/8.6.1' \
+  --header 'X-Credential-Token: 7a39c8fd4091665d51504a36b7fed894' \
+  --data '{
+    "to": "samanamman@gmail.com",
+    "subject": "sssss",
+    "body": "test v8",
+    "isHTMLBody": false
+  }' \
+  --dns-servers 8.8.8.8

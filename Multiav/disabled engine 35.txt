@@ -1,0 +1,4 @@
+pulling docker container malice/fsecure
+pulling docker container malice/escan
+pulling docker container malice/fileinfo
+pulling docker container malice/shadow-server
