@@ -1,0 +1,1 @@
+sudo chown -R develop:develop /home/dstv3/publish/

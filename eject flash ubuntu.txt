@@ -1,0 +1,3 @@
+sudo pkill -f /media/sdb1 
+sudo umount /media/sdb1
+sudo rm -rf /media/sdb1

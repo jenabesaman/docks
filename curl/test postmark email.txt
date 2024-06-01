@@ -46,3 +46,12 @@ curl --request POST \
     "isHTMLBody": false
   }' \
   --dns-servers 8.8.8.8
+
+
+
+windows:
+Invoke-WebRequest -Uri "https://api.postmarkapp.com/" -Headers @{"X-Postmark-Server-Token"="6cd4b398-ecfb-4505-bbdf-1b66192614cb"}
+
+ubuntu:
+curl -L -X GET "https://api.postmarkapp.com/" -H "X-Postmark-Server-Token: 6cd4b398-ecfb-4505-bbdf-1b66192614cb"
+
