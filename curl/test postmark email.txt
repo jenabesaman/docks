@@ -35,7 +35,7 @@ curl --request POST \
 
 
 curl --request POST \
-  --url https://172.16.40.170:44363/api/Email/Send \
+  --url https://develop.ddss.local:44363/api/Email/Send \
   --header 'Content-Type: application/json' \
   --header 'User-Agent: insomnia/8.6.1' \
   --header 'X-Credential-Token: 7a39c8fd4091665d51504a36b7fed894' \
@@ -47,6 +47,15 @@ curl --request POST \
   }' \
   --dns-servers 8.8.8.8
 
+
+working now:
+
+curl --request POST   --url https://develop.ddss.local:44363/api/Email/Send   --header 'Content-Type: application/json'   --header 'User-Agent: insomnia/8.6.1'   --header 'X-Credential-Token: 7a39c8fd4091665d51504a36b7fed894'   --data '{
+  "to": "samanamman@gmail.com",
+  "subject": "sssss",
+  "body": "test v8",
+  "isHTMLBody": false
+}'
 
 
 windows:
